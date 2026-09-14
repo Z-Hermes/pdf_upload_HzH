@@ -3,11 +3,12 @@
 	// No JavaScript is required for the basic marketing page.
 </script>
 
-[svelte:head](svelte:head) <title>PDF Upload – Secure File Management</title> <meta
+<svelte:head> 
+    <title>PDF Upload – Secure File Management</title> <meta
  	name="description"
  	content="Upload, manage and securely access your PDF files."
  />
- 
+
 </svelte:head>
 
 <div class="page">
