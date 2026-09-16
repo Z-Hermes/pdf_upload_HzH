@@ -81,7 +81,7 @@
 		</div>
 	{:else}
 		<div class="file-list">
-			{#each data.pdfs as pdf}
+			{#each data.pdfs as pdf (pdf.id)}
 				<div class="file-card">
 					<div class="file-info">
 						<div class="pdf-icon">PDF</div>
