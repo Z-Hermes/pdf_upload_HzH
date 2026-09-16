@@ -5,7 +5,8 @@ import { invalidateSession } from '$lib/server/auth.js';
 import { redirect } from '@sveltejs/kit';
 
 // ===================== LOGOUT =====================
-export async function GET({ cookies }) {
+// load() wird automatisch ausgeführt, sobald die Seite /logout aufgerufen wird
+export async function load({ cookies }) {
 	// Session-ID aus Cookie holen (aktuell eingeloggter User)
 	const sessionId = cookies.get('session');
 
