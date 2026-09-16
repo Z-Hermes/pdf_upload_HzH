@@ -12,15 +12,7 @@
 </svelte:head>
 
 <div class="page">
-	<header class="navbar">
-		<div class="logo">PDF Upload</div>
-
-```
-	<nav>
-		<a href="/">Home</a>
-		<a href="/login">Login</a>
-	</nav>
-</header>
+	
 
 <main>
 	<section class="hero">
