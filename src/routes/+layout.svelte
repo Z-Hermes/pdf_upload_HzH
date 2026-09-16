@@ -1,4 +1,6 @@
 <script>
+	import './layout.css';
+
 	let { children, data } = $props();
 
 	const user = data?.user;
