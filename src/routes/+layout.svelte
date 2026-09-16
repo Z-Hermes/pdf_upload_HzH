@@ -3,7 +3,7 @@
 
 	let { children, data } = $props();
 
-	const user = data?.user;
+	let user = $derived(data?.user);
 </script>
 
 <svelte:head> <meta name="viewport" content="width=device-width, initial-scale=1" />
