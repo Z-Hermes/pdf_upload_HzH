@@ -28,8 +28,7 @@ export async function createSession(userId) {
 export async function getSession(sessionId) {
 	if (!sessionId) return null;
 	const [rows] = await pool.execute(
-		`SELECT u.id, u.username, u.role
-		 FROM sessions s
+		`SELECT u.id, u.username, u.role FROM sessions s
 		 JOIN users u ON s.user_id = u.id
 		 WHERE s.id = ? AND s.expires_at > NOW()`,
 		[sessionId]
