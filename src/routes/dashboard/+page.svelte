@@ -1,7 +1,7 @@
 <script>
 	let { data, form } = $props();
 
-	let selectedFile = null;
+	let selectedFile = $state(null);
 
 	function handleFileChange(event) {
 		selectedFile = event.target.files[0];
