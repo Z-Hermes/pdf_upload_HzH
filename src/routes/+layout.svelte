@@ -2,36 +2,32 @@
 	import './layout.css';
 
 	let { children, data } = $props();
-
-	let user = $derived(data?.user);
 </script>
 
-<svelte:head> <meta name="viewport" content="width=device-width, initial-scale=1" />
+<svelte:head>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 </svelte:head>
 
 <header class="navbar">
 	<div class="nav-container">
 		<a href="/" class="logo">PDF Upload</a>
 
-```
-	<nav>
-		<a href="/">Home</a>
+		<nav>
+			<a href="/">Home</a>
 
-		{#if user}
-			<a href="/dashboard">Dashboard</a>
+			{#if data?.user}
+				<a href="/dashboard">Dashboard</a>
 
-			{#if user.role === 'admin'}
-				<a href="/admin">Admin</a>
+				{#if data.user.role === 'admin'}
+					<a href="/admin">Admin</a>
+				{/if}
+
+				<a href="/logout" class="logout">Logout</a>
+			{:else}
+				<a href="/login" class="login">Login</a>
 			{/if}
-
-			<a href="/logout" class="logout">Logout</a>
-		{:else}
-			<a href="/login" class="login">Login</a>
-		{/if}
-	</nav>
-</div>
-```
-
+		</nav>
+	</div>
 </header>
 
 <main>
@@ -62,7 +58,6 @@
 		max-width: 1200px;
 		margin: 0 auto;
 		padding: 18px 24px;
-
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
