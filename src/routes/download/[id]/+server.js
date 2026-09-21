@@ -1,6 +1,7 @@
 import { error, redirect } from '@sveltejs/kit';
 import { get } from '@vercel/blob';
 import pool from '$lib/server/db.js';
+import { BLOB_READ_WRITE_TOKEN } from '$env/static/private';
 
 export async function GET({ params, locals }) {
 	if (!locals.user) {
@@ -31,17 +32,21 @@ export async function GET({ params, locals }) {
 	}
 
 	const result = await get(pdf.stored_name, {
-		access: 'private'
+		access: 'public',
+		token: BLOB_READ_WRITE_TOKEN
 	});
 
 	if (!result) {
 		throw error(404, 'Datei nicht gefunden.');
 	}
 
+	// Dateiname für den HTTP-Header sicher kodieren (Header erlauben keine Emojis/Sonderzeichen)
+	const safeName = encodeURIComponent(pdf.original_name);
+
 	return new Response(result.stream, {
 		headers: {
 			'Content-Type': 'application/pdf',
-			'Content-Disposition': `attachment; filename="${pdf.original_name}"`
+			'Content-Disposition': `attachment; filename*=UTF-8''${safeName}`
 		}
 	});
 }
