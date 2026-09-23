@@ -4,7 +4,6 @@ import { invalidateSession } from '$lib/server/auth.js';
 // Redirect Funktion von SvelteKit (Weiterleitung nach Logout)
 import { redirect } from '@sveltejs/kit';
 
-// ===================== LOGOUT =====================
 // load() wird automatisch ausgeführt, sobald die Seite /logout aufgerufen wird
 export async function load({ cookies }) {
 	// Session-ID aus Cookie holen (aktuell eingeloggter User)

@@ -1,7 +1,8 @@
-// Datenbankverbindung importieren
+// Datenbankverbindung und Blob-Funktionen importieren
 import pool from '$lib/server/db.js';
-import fs from 'fs/promises';
+import { del } from '@vercel/blob';
 import { fail } from '@sveltejs/kit';
+import { BLOB_READ_WRITE_TOKEN } from '$env/static/private';
 
 // Lädt alle PDFs aller User, inkl. Benutzername
 export async function load() {
@@ -15,7 +16,7 @@ export async function load() {
 }
 
 export const actions = {
-	// Löscht ein PDF: Datei von der Platte + Eintrag aus der DB
+	// Löscht ein PDF: Datei aus Vercel Blob + Eintrag aus der DB
 	delete: async ({ request }) => {
 		const data = await request.formData();
 		const id = data.get('id');
@@ -27,11 +28,11 @@ export const actions = {
 			return fail(404, { error: 'PDF nicht gefunden' });
 		}
 
-		// Datei von der Festplatte löschen
+		// Datei aus dem Blob-Store löschen
 		try {
-			await fs.unlink(`uploads/${pdf.stored_name}`);
+			await del(pdf.stored_name, { token: BLOB_READ_WRITE_TOKEN });
 		} catch (err) {
-			console.error('Datei konnte nicht gelöscht werden:', err);
+			console.error('Blob konnte nicht gelöscht werden:', err);
 		}
 
 		// Eintrag aus der Datenbank löschen

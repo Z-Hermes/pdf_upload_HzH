@@ -27,7 +27,9 @@ export const actions = {
 			maxAge: 60 * 60 * 24 * 7 // 7 Tage
 		});
 
+		console.log('User role:', user.role, '| Typ:', typeof user.role);
+		throw redirect(303, user.role === 'admin' ? '/admin' : '/dashboard');
 		// Je nach Rolle weiterleiten
 		throw redirect(303, user.role === 'admin' ? '/admin' : '/dashboard');
-	}
+	}		
 };

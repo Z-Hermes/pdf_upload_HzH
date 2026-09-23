@@ -22,7 +22,7 @@
 					<a href="/admin">Admin</a>
 				{/if}
 
-				<a href="/logout" class="logout">Logout</a>
+				<a href="/logout" data-sveltekit-reload class="logout">Logout</a>
 			{:else}
 				<a href="/login" class="login">Login</a>
 			{/if}
